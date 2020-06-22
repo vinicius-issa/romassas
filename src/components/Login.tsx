@@ -1,17 +1,18 @@
 import React, {useState} from 'react';
 import {Container, TextField, Button} from '@material-ui/core'
+import {Alert} from '@material-ui/lab';
 import {auth} from '../services/firebase';
+import { RouteComponentProps } from 'react-router-dom';
+import './Login.css';
 
-interface Props{
-    email:string;
-    password: string;
-}
 
-const Login: React.FC<Props> = ({email,password}) => {
+const Login: React.FC<RouteComponentProps> = ({history}) => {
     const [fields, setFields] = useState({
         email:'',
-        password:''
+        password:'',
     });
+
+    const [errorMessage, setErrorMessage] = useState('');
 
     const handleChange = (event:React.ChangeEvent<HTMLInputElement>) =>{
         event.persist();
@@ -21,21 +22,23 @@ const Login: React.FC<Props> = ({email,password}) => {
     const handleSubmit = (event:React.FormEvent) =>{
         event.preventDefault();
         let {email,password} = fields;
-        auth.signInWithEmailAndPassword(email, password).catch(function(error) {
-            // Handle Errors here.
-            console.error(error);
-            // ...
+        auth.signInWithEmailAndPassword(email, password)
+            .then(function(user){
+                history.push('/');
+            })
+            .catch(function(error) {
+                setFields(fields=>({...fields,password:''}));
+                if(error.code==='auth/user-not-found') setErrorMessage("Usuario não cadastrado");
+                else if(error.code==='auth/wrong-password') setErrorMessage("Senha Inválida");
+                else setErrorMessage("Um erro inexperado aconteceu");
           });
-
-        auth.onAuthStateChanged(user=>{
-            if(user) console.log(user);
-        })
 
     }
 
     return (
-        <Container>
-            <form  noValidate  onSubmit={handleSubmit}>
+        <Container maxWidth="xs" >
+            {errorMessage!=='' && <Alert severity="error">{errorMessage}</Alert>}
+            <form  noValidate  onSubmit={handleSubmit} className="flex-container">
                 <TextField  type='text' name="email" label="Email" onChange={handleChange} value={fields.email}/>
                 <TextField  type='password' name="password" label="Senha" onChange={handleChange} value={fields.password}/>
                 <Button variant="contained" color="primary" type='submit'>

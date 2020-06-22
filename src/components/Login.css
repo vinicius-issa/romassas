@@ -1,0 +1,8 @@
+.flex-container{
+    display: flex;
+    flex-direction: column;
+}
+
+.flex-container input, .flex-container button{
+    margin-top: 15px;
+}

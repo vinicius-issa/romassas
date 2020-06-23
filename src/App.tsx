@@ -1,11 +1,22 @@
 import React from 'react';
+import { Container } from '@material-ui/core';
 
-function App() {
+import Route from './routes'
+import './App.css'
+import Alert from './components/elements/Alert'
+
+
+
+const App: React.FC<{}> = ()=> {
   return (
     <div className="App">
-      Hello World
+      <Container >
+        <Alert />
+        <Route/>
+      </Container>
     </div>
   );
 }
+
 
 export default App;

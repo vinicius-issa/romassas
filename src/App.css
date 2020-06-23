@@ -1,0 +1,12 @@
+h1{
+    font-family: Roboto, 'Open Sans', 'Helvetica Neue', sans-serif;
+    text-align: center;
+    color: #444;
+}
+
+
+.flex-container{
+    display: flex !important;
+    flex-direction: column;
+    width: 100%;
+}

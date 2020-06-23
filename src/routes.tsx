@@ -1,13 +1,12 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
 import Login from './components/Login';
-import App from './App';
 import isLogged from './middleware/isLogged';
 
 interface Props{
     component:any;
     path : string;
-    exact ?: any;
+    exact ?: boolean;
 }
 
 const PrivateRoute = ({component: Component, ...rest}:Props) => (
@@ -26,7 +25,7 @@ const PrivateRoute = ({component: Component, ...rest}:Props) => (
 const Routes: React.FC<{}> = props => (
     <BrowserRouter>
         <Switch>
-            <PrivateRoute path="/" exact component={App} />
+            <PrivateRoute path="/" exact component={()=><h1>Hello Wolrd</h1>} />
             <Route path="/login" component={Login} />
         </Switch>
     </BrowserRouter>

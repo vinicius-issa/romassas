@@ -10,3 +10,7 @@ h1{
     flex-direction: column;
     width: 100%;
 }
+.flex-container-row{
+    display: flex !important;
+    margin: 20px 00px;
+}

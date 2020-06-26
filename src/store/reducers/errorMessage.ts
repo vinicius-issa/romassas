@@ -1,9 +1,8 @@
-interface IAction{
-    type:string;
-    payload: string;
-}
+import { ActionType } from '../types/errorMessage'
 
-export default function(state:{},action:IAction){
+
+
+export default function(state:{},action:ActionType){
     switch(action.type){
         case 'ERROR_UPDATE':
             return {

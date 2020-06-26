@@ -11,6 +11,7 @@ export function setErrorMessage(errorCode:string){
             errorMessage = "Senha Inválida"
             break;
         default:
+            console.log(errorCode);
             errorMessage = "Um erro inexperado aconteceu"
             break;
     }

@@ -1,11 +1,6 @@
 import { firestore } from '../../services/firebase';
 import  {setErrorMessage} from './errorMessage'
-
-interface ISnack{
-    id ?: string;
-    name : string;
-    type: string;
-}
+import { ISnack } from '../../interfaces/ISnack'
 
 export function changeName(name:string){
     return {

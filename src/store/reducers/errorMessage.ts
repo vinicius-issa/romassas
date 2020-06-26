@@ -1,6 +1,4 @@
-import { ActionType } from '../types/errorMessage'
-
-
+import { ActionType } from '../../interfaces/errorMessage'
 
 export default function(state:{},action:ActionType){
     switch(action.type){

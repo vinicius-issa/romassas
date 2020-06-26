@@ -1,13 +1,8 @@
+import { ISnack } from '../../interfaces/ISnack'
 
 interface IAction{
     type:string;
     payload: ISnack;
-}
-
-interface ISnack{
-    id: string;
-    name: string;
-    type: string;
 }
 
 const INITIAL_STATE = {

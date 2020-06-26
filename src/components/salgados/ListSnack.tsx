@@ -6,18 +6,13 @@ import EditIcon from '@material-ui/icons/Edit';
 import { listSnacks, setSnack, deleteSnack } from '../../store/actions/snack'
 import { IconButton, Table, TableBody, TableHead, TableRow, TableCell, TableContainer, Paper } from '@material-ui/core'
 import { descendingComparator } from '../../services/sort';
+import { ISnack } from '../../interfaces/ISnack'
 
 interface Props{
     list:any;
     listAllSnacks:any;
     setSnackEdit:any;
     delSnack:any;
-}
-
-interface ISnack{
-    id ?: string;
-    name : string;
-    type: string;
 }
 
 const ListSnack:React.FC<Props> = ({list, listAllSnacks, setSnackEdit, delSnack}) => {

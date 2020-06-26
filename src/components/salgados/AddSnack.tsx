@@ -1,8 +1,9 @@
 import React from 'react'
+import { connect } from 'react-redux'
 
 import { TextField, Button, Select } from '@material-ui/core';
 import { changeName, saveSnack, changeType } from '../../store/actions/snack';
-import { connect } from 'react-redux'
+import { ISnack } from '../../interfaces/ISnack'
 import './Snack.css'
 
 interface Props{
@@ -10,12 +11,6 @@ interface Props{
     setName : any;
     saveChange: any;
     setType: any;
-}
-
-interface ISnack{
-    id ?: string;
-    name: string;
-    type: string;
 }
 
 const Add:React.FC<Props> = ({snack = {}, setName, saveChange, setType}) => {

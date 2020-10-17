@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
 import Login from './components/Login';
 import isLogged from './middleware/isLogged';
 import Snack from './components/salgados/Snack';
+import Order from './components/orders/newOrder';
 
 interface Props{
     component:any;
@@ -28,6 +29,7 @@ const Routes: React.FC<{}> = props => (
         <Switch>
             <PrivateRoute path="/" exact component={()=><h1>Hello Wolrd</h1>} />
             <PrivateRoute path="/salgados/" component={Snack} />
+            <PrivateRoute path="/pedidos/" component={Order} />
             <Route path="/login" component={Login} />
         </Switch>
     </BrowserRouter>

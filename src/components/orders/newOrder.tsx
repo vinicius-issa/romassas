@@ -3,7 +3,8 @@ import { connect } from 'react-redux'
 
 import { Container, TextField, Button, Select, FormGroup, FormControl, InputLabel, Input, MenuItem, FormControlLabel, Switch } from '@material-ui/core';
 import { setOrder } from '../../store/actions/order';
-import { IOrder, IAction } from '../../interfaces/IOrder'
+import { IOrder } from '../../interfaces/IOrder'
+import SetSnack from './SetSnack'
 
 interface Props {
     order: IOrder,
@@ -13,7 +14,7 @@ interface Props {
 const Order: React.FC<Props> = ({ order, changeOrder }) => {
 
     const handleChangeOrder = (event: React.ChangeEvent<HTMLInputElement>) => {
-        event.persist();
+    event.persist();
         const field = event.currentTarget.name
         changeOrder({
             ...order,
@@ -100,7 +101,7 @@ const Order: React.FC<Props> = ({ order, changeOrder }) => {
                 />
             </FormControl>
 
-
+            {!order.varied && <SetSnack/>}
 
             <FormControl fullWidth={true}>
                 <FormControlLabel

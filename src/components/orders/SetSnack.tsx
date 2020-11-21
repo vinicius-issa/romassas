@@ -66,6 +66,16 @@ const SetSnack: React.FC<Props> = ({ order, changeOrder, snackList, listAllSnack
         setAutocompleteValue('')
     }
 
+    const removeSnack = (id:string|undefined) =>{
+        const snacksOrdered = order.snacks.slice();
+        const index = snacksOrdered.findIndex(snacks=>snacks.snack.id===id)
+        if(index===-1){
+            return
+        }
+        snacksOrdered.splice(index,1)
+        changeOrder({...order,snacks:snacksOrdered})
+    }
+
     return (<div>
 
         <TableContainer component={Paper}>
@@ -79,11 +89,19 @@ const SetSnack: React.FC<Props> = ({ order, changeOrder, snackList, listAllSnack
                 </TableHead>
                 <TableBody>
                     {
-                        order.snacks.map((snack,index) => (
+                        order.snacks.map((snack) => (
                             <TableRow>
                                 <TableCell>{snack.snack.name}</TableCell>
                                 <TableCell>{snack.quantity}</TableCell>
-                                <TableCell>X</TableCell>
+                                <TableCell>
+                                    <Button 
+                                        variant="contained" 
+                                        color='secondary' 
+                                        onClick={(event:any)=>removeSnack(snack.snack.id)}
+                                    >
+                                            X
+                                    </Button>
+                                </TableCell>
                             </TableRow>
                         ))
                     }
@@ -105,7 +123,6 @@ const SetSnack: React.FC<Props> = ({ order, changeOrder, snackList, listAllSnack
                         </TableCell>
                         <TableCell>
                             <FormControl fullWidth={true}>
-                                <InputLabel htmlFor="quantity">Quantidade</InputLabel>
                                 <Input 
                                     id='quantity'
                                     name='quantity'
@@ -117,7 +134,7 @@ const SetSnack: React.FC<Props> = ({ order, changeOrder, snackList, listAllSnack
                         </TableCell>
                         <TableCell>
                             <Button variant='contained' color='primary' onClick={addSnacks}>
-                                +
+                                Add
                             </Button>
                         </TableCell>
                     </TableRow>

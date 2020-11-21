@@ -13,13 +13,14 @@ import {
     InputLabel,
     TableHead,
     Input,
-    TextField
+    TextField,
+    Button
 } from '@material-ui/core';
 
 import { IOrder, ISnackQty } from '../../interfaces/IOrder'
 import { ISnack } from '../../interfaces/ISnack'
 import { setOrder } from '../../store/actions/order';
-import { listSnacks } from '../../store/actions/snack'
+import { listSnacks, setSnack } from '../../store/actions/snack'
 import { Autocomplete } from '@material-ui/lab';
 
 interface Props {
@@ -30,22 +31,18 @@ interface Props {
 }
 
 const SetSnack: React.FC<Props> = ({ order, changeOrder, snackList, listAllSnacks }) => {
-
-    const [newSnackQty, setNewSnackQty] = useState<ISnackQty>({snack:{name:'',type:''},'quantity':0})
+    const defaultSnack = {snack:{name:'',type:'', id:undefined},'quantity':0};
+    const [newSnackQty, setNewSnackQty] = useState<ISnackQty>(defaultSnack)
+    const [autocompleteValue, setAutocompleteValue] = useState('')
 
     useEffect(() => {
         listAllSnacks()
     },[])
 
-    const handleChangeSnackName = (event: React.ChangeEvent<HTMLInputElement>) => {
-        event.persist();
-        let snack = newSnackQty.snack
-        snack.name = event.target.value;
-        console.log(snack)
-        setNewSnackQty( (snackQty)=>({
-            ...snackQty,
-            snack
-        }))
+    const handleChangeSnackName = (event: React.ChangeEvent<any>, snack: ISnack | null) => {
+        if(snack){
+            setNewSnackQty({...newSnackQty, snack})
+        }
     }
 
     const handleChangeQuantity = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -55,6 +52,18 @@ const SetSnack: React.FC<Props> = ({ order, changeOrder, snackList, listAllSnack
             ...snackQty,
             quantity:value
         }))
+    }
+
+    const addSnacks = (event: React.MouseEvent) => {
+        if(!newSnackQty.snack.id){
+            return
+        }
+        
+        const snacksOrdered = order.snacks.slice();
+        snacksOrdered.push(newSnackQty)
+        changeOrder({...order,snacks:snacksOrdered})
+        setNewSnackQty(defaultSnack)
+        setAutocompleteValue('')
     }
 
     return (<div>
@@ -70,7 +79,7 @@ const SetSnack: React.FC<Props> = ({ order, changeOrder, snackList, listAllSnack
                 </TableHead>
                 <TableBody>
                     {
-                        order.snacks.map(snack => (
+                        order.snacks.map((snack,index) => (
                             <TableRow>
                                 <TableCell>{snack.snack.name}</TableCell>
                                 <TableCell>{snack.quantity}</TableCell>
@@ -85,12 +94,11 @@ const SetSnack: React.FC<Props> = ({ order, changeOrder, snackList, listAllSnack
                                 <Autocomplete
                                     options={snackList}
                                     getOptionLabel={(option:ISnack)=>option.name}
+                                    onChange={handleChangeSnackName}
+                                    inputValue={autocompleteValue}
+                                    onInputChange={(e,newValue)=>{setAutocompleteValue(newValue)}}
                                     renderInput={(params)=><TextField
                                         {...params}
-                                        value={newSnackQty.snack.name}
-                                        name='name'
-                                        onChange={handleChangeSnackName}
-                                        
                                     />}
                                 />
                             </FormControl>
@@ -107,7 +115,11 @@ const SetSnack: React.FC<Props> = ({ order, changeOrder, snackList, listAllSnack
                                 />
                             </FormControl>
                         </TableCell>
-                        <TableCell>Salvar</TableCell>
+                        <TableCell>
+                            <Button variant='contained' color='primary' onClick={addSnacks}>
+                                +
+                            </Button>
+                        </TableCell>
                     </TableRow>
                 </TableBody>
             </Table>

@@ -29,7 +29,8 @@ const Routes: React.FC<{}> = props => (
         <Switch>
             <PrivateRoute path="/" exact component={()=><h1>Hello Wolrd</h1>} />
             <PrivateRoute path="/salgados/" component={Snack} />
-            <PrivateRoute path="/pedidos/" component={Order} />
+            <PrivateRoute path="/pedidos" exact component={(props:any)=><Order {...props} />} />
+            <PrivateRoute path="/pedidos/:id" component={Order} />
             <Route path="/login" component={Login} />
         </Switch>
     </BrowserRouter>

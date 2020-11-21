@@ -1,5 +1,24 @@
 import { ISnack } from './ISnack'
 
+const now = new Date()
+export const INITIAL_STATE = {
+    id : '',
+    client : '',
+    phone : '',
+    date : now.getTime(),
+    shop : 'MATRIZ',
+    delivery : false,
+    address : '',
+    quantity : 0,
+    snacks : [],
+    value : 0,
+    paid : false,
+    paymentForm : '',
+    status : 'RECEIVED',
+    varied : true,
+    note: ''
+}
+
 export interface ISnackQty{
     quantity: number;
     snack: ISnack;
@@ -7,7 +26,7 @@ export interface ISnackQty{
 
 export interface IAction {
     type: string;
-    payload: IOrder;
+    payload?: IOrder;
 }
 
 export interface IOrder{

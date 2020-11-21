@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 
 import { Container, TextField, Button, Select, FormGroup, FormControl, InputLabel, Input, MenuItem, FormControlLabel, Switch } from '@material-ui/core';
-import { setOrder, saveOrder } from '../../store/actions/order';
+import { setOrder, saveOrder, getOrder } from '../../store/actions/order';
 import { IOrder } from '../../interfaces/IOrder'
 import SetSnack from './SetSnack'
 import { setErrorMessage } from '../../store/actions/errorMessage'
@@ -13,9 +13,18 @@ interface Props {
     setError: any,
     save: any,
     history:any,
+    match?:any,
+    get:any,
 }
 
-const Order: React.FC<Props> = ({ order, changeOrder, setError, save, history }) => {
+const Order: React.FC<Props> = ({ order, changeOrder, setError, save, history, match, get }) => {
+
+    useEffect(()=>{
+        const id = match.params.id;
+        if(id){
+            get(id);
+        }
+    },[get])
 
     const handleChangeOrder = (event: React.ChangeEvent<HTMLInputElement>) => {
         event.persist();
@@ -216,6 +225,10 @@ function mapDispatchToProps(dispatch: any) {
             const action = saveOrder(order)
             dispatch(action);
         },
+        get(id: string){
+            const action = getOrder(id);
+            dispatch(action);
+        }
     }
 }
 

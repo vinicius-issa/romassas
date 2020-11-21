@@ -1,24 +1,6 @@
-import { IOrder, IAction } from '../../interfaces/IOrder'
+import { IOrder, IAction, INITIAL_STATE } from '../../interfaces/IOrder'
 
-const now = new Date()
 
-const INITIAL_STATE = {
-    id : undefined,
-    client : '',
-    phone : '',
-    date : now.getTime(),
-    shop : 'MATRIZ',
-    delivery : false,
-    address : '',
-    quantity : 0,
-    snacks : [],
-    value : 0,
-    paid : false,
-    paymentForm : '',
-    status : 'RECEIVED',
-    varied : true,
-    note: ''
-}
 
 export default function (state:IOrder = INITIAL_STATE, action: IAction) {
     switch (action.type) {

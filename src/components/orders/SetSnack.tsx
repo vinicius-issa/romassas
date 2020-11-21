@@ -31,7 +31,7 @@ interface Props {
 }
 
 const SetSnack: React.FC<Props> = ({ order, changeOrder, snackList, listAllSnacks }) => {
-    const defaultSnack = {snack:{name:'',type:'', id:undefined},'quantity':0};
+    const defaultSnack = {snack:{name:'',type:'', id:''},'quantity':0};
     const [newSnackQty, setNewSnackQty] = useState<ISnackQty>(defaultSnack)
     const [autocompleteValue, setAutocompleteValue] = useState('')
 
@@ -55,7 +55,7 @@ const SetSnack: React.FC<Props> = ({ order, changeOrder, snackList, listAllSnack
     }
 
     const addSnacks = (event: React.MouseEvent) => {
-        if(!newSnackQty.snack.id){
+        if(newSnackQty.snack.id===''){
             return
         }
         

@@ -10,8 +10,10 @@ export function setErrorMessage(errorCode:string){
         case 'auth/wrong-password':
             errorMessage = "Senha Inválida"
             break;
+        case 'form/order/client':
+            errorMessage = "Favor preencher o campo 'Nome do Cliente'"
+            break;
         default:
-            console.log(errorCode);
             errorMessage = "Um erro inexperado aconteceu"
             break;
     }

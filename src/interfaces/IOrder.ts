@@ -1,7 +1,7 @@
 import { ISnack } from './ISnack'
 
 const now = new Date()
-export const INITIAL_STATE = {
+export const INITIAL_STATE:IOrder = {
     id : '',
     client : '',
     phone : '',
@@ -33,7 +33,7 @@ export interface IOrder{
     id ?: string;
     client: string;
     phone: string;
-    date: number;
+    date: Date | string | number;
     shop: string;
     delivery: boolean;
     address: string;

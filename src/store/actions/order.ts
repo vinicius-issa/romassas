@@ -1,4 +1,5 @@
 import { firestore } from '../../services/firebase';
+import {  formatDate } from '../../services/date';
 import { setErrorMessage } from './errorMessage'
 import { IOrder, IAction, INITIAL_STATE } from '../../interfaces/IOrder'
 
@@ -17,6 +18,8 @@ export const  getOrder = (id: string) => (dispatch: any) => {
         if(doc.exists){
             let order = INITIAL_STATE;
             order = {...order ,...doc.data(), id}
+            const date = new Date(order.date)
+            order.date = formatDate(date)
             return dispatch(setOrder(order))
         }
     })
@@ -28,6 +31,8 @@ export const  getOrder = (id: string) => (dispatch: any) => {
 }
 
 export const saveOrder = (order: IOrder) => (dispatch: any) => {
+    const date = new Date(order.date)
+    order.date = date.getTime();
     if (order.id) {
         firestore.collection('orders').doc(order.id).set(order)
             .then(() => {

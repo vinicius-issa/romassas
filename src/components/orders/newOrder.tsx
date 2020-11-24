@@ -81,9 +81,10 @@ const Order: React.FC<Props> = ({ order, changeOrder, setError, save, history, m
                 <FormControl fullWidth={true}>
                     <TextField
                         id="date"
-                        label="Data do Pedido"
+                        label="Data"
                         type="datetime-local"
-                        defaultValue={order.date} //Dont working. TODO
+                        defaultValue={order.date}
+                        value={order.date}
                         name='date'
                         onChange={handleChangeOrder}
                         InputLabelProps={{

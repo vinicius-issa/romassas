@@ -127,7 +127,7 @@ const Order: React.FC<Props> = ({ order, changeOrder, setError, save, history, m
                     />
                 </FormControl>
 
-                {!order.varied && <SetSnack />}
+                {(!order.varied || (order.varied && order.status!=='RECEIVED')) && <SetSnack />}
 
                 <FormControl fullWidth={true}>
                     <FormControlLabel

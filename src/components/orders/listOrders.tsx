@@ -11,7 +11,7 @@ import './listOrder.css'
 function ListOrder(props:any) {
     const [orders,setOrders] = useState<IOrder[]>([])
     const [update, setUpdate] = useState(0)
-    const [filter,setFilter] = useFilter()
+    const [filter,] = useFilter()
     
     useEffect(()=>{
         const {start,end} = filter
@@ -24,7 +24,7 @@ function ListOrder(props:any) {
             })
             setOrders(savedOrders)
         })
-    },[setOrders, firestore, update, filter])
+    },[setOrders, update, filter])
     
     return (
         <div id='list-orders'>

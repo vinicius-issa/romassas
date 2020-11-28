@@ -28,7 +28,7 @@ const useFilter = (dateStart?:string,dateEnd?:string):[Filter,any] => {
 
     useEffect(()=>{
         setFilter(dateStart,dateEnd)
-    },[])
+    },[dateEnd, dateStart])
     
     
     return [

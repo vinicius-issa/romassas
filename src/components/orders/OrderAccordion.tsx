@@ -15,12 +15,6 @@ interface Props {
     setUpdate: any,
 }
 
-const STATUS = {
-    'RECEIVED' : 'Recebido',
-    'SEPARATED' : 'Separado',
-    'FINISHED' : 'Finalizado',
-}
-
 const OrderAccordion: React.FC<Props> = ({order, setUpdate}) => {
     const hour = formatTime(order.date)
 

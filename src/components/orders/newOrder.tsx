@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 
-import { Container, TextField, Button, Select, FormGroup, FormControl, InputLabel, Input, MenuItem, FormControlLabel, Switch } from '@material-ui/core';
+import { Container, TextField, Button, Select,  FormControl, InputLabel, Input, MenuItem, FormControlLabel, Switch } from '@material-ui/core';
 import { setOrder, saveOrder, getOrder } from '../../store/actions/order';
 import { IOrder } from '../../interfaces/IOrder'
 import SetSnack from './SetSnack'
@@ -24,7 +24,7 @@ const Order: React.FC<Props> = ({ order, changeOrder, setError, save, history, m
         if(id){
             get(id);
         }
-    },[get])
+    },[get, match.params.id])
 
     const handleChangeOrder = (event: React.ChangeEvent<HTMLInputElement>) => {
         event.persist();

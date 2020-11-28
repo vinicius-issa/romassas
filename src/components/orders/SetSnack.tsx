@@ -8,9 +8,6 @@ import {
     Table,
     TableContainer,
     FormControl,
-    Select,
-    MenuItem,
-    InputLabel,
     TableHead,
     Input,
     TextField,
@@ -20,7 +17,7 @@ import {
 import { IOrder, ISnackQty } from '../../interfaces/IOrder'
 import { ISnack } from '../../interfaces/ISnack'
 import { setOrder } from '../../store/actions/order';
-import { listSnacks, setSnack } from '../../store/actions/snack'
+import { listSnacks } from '../../store/actions/snack'
 import { Autocomplete } from '@material-ui/lab';
 
 interface Props {
@@ -37,7 +34,7 @@ const SetSnack: React.FC<Props> = ({ order, changeOrder, snackList, listAllSnack
 
     useEffect(() => {
         listAllSnacks()
-    },[])
+    },[listAllSnacks])
 
     const handleChangeSnackName = (event: React.ChangeEvent<any>, snack: ISnack | null) => {
         if(snack){

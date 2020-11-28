@@ -33,6 +33,9 @@ export const  getOrder = (id: string) => (dispatch: any) => {
 export const saveOrder = (order: IOrder) => (dispatch: any) => {
     const date = new Date(order.date)
     order.date = date.getTime();
+    order.value = +order.value
+    order.quantity = +order.quantity
+
     if (order.id) {
         firestore.collection('orders').doc(order.id).set(order)
             .then(() => {
@@ -53,7 +56,6 @@ export const saveOrder = (order: IOrder) => (dispatch: any) => {
                     }
                 );
             }).catch ((error) => {
-                console.error(error.code, error);
                 dispatch(setErrorMessage(error.code));
         });
     }

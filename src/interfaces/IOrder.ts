@@ -42,7 +42,7 @@ export interface IOrder{
     value: number;
     paid: boolean;
     paymentForm: string;
-    status: string;
+    status: 'RECEIVED' |  'SEPARATED' | 'FINISHED' ;
     varied: boolean;
     note: string;
 }

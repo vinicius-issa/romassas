@@ -4,6 +4,7 @@ import Login from './components/Login';
 import isLogged from './middleware/isLogged';
 import Snack from './components/salgados/Snack';
 import Order from './components/orders/newOrder';
+import listOrders from './components/orders/listOrders';
 
 interface Props{
     component:any;
@@ -27,7 +28,7 @@ const PrivateRoute = ({component: Component, ...rest}:Props) => (
 const Routes: React.FC<{}> = props => (
     <BrowserRouter>
         <Switch>
-            <PrivateRoute path="/" exact component={()=><h1>Hello Wolrd</h1>} />
+            <PrivateRoute path="/" exact component={listOrders} />
             <PrivateRoute path="/salgados/" component={Snack} />
             <PrivateRoute path="/pedidos/add" exact component={(props:any)=><Order {...props} />} />
             <PrivateRoute path="/pedidos/add/:id" component={Order} />

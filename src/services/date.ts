@@ -17,3 +17,11 @@ export const formatNumber = (value:number) => {
 
     return value.toString()
 }
+
+export const formatTime = (timestamp:number|Date|string) => {
+    const date = new Date(timestamp)
+    const hour = formatNumber(date.getHours())
+    const minute = formatNumber(date.getMinutes())
+
+    return `${hour}:${minute}`
+}

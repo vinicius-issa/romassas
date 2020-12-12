@@ -10,6 +10,16 @@ export const formatDate = (date:Date) => {
     return formated   
 }
 
+export const getDate = (date:Date) => {
+    const year = date.getUTCFullYear()
+    const month = formatNumber(date.getMonth() + 1)
+    const day = formatNumber(date.getDate())
+ 
+    const formated = `${year}-${month}-${day}`
+
+    return formated   
+}
+
 export const formatNumber = (value:number) => {
     if(value<10){
         return `0${value}`
